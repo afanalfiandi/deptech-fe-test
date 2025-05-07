@@ -1,7 +1,11 @@
-<div class="bg-gray-100 h-screen w-full p-2">
+<div class="bg-gray-100 h-screen w-full flex flex-col">
   <app-sidenav></app-sidenav>
-  <div class="p-2 sm:ml-64">
+
+  <div class="flex-1 p-2 sm:ml-64 overflow-hidden flex flex-col">
     <app-navbar></app-navbar>
-    <router-outlet></router-outlet>
+
+    <div class="flex-1 overflow-y-auto">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

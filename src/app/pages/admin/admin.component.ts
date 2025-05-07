@@ -27,7 +27,11 @@ export class AdminComponent implements OnInit {
 
   onAddData() {
     this.router.navigate(["/form"], {
-      state: { formData: AdminFormData, mode: "add", title: "Admin" },
+      state: {
+        formData: AdminFormData,
+        mode: "add",
+        collectionName: "admin",
+      },
     });
   }
 
@@ -37,14 +41,17 @@ export class AdminComponent implements OnInit {
         formData: AdminFormData,
         mode: "edit",
         data: value,
-        title: "Admin",
+        collectionName: "admin",
       },
     });
   }
 
-  onDeleteData() {
+  onDeleteData(id: number) {
     this.router.navigate(["/delete"], {
-      state: { data: this.data.data[0] },
+      state: {
+        id: id,
+        collection: "admin",
+      },
     });
   }
 

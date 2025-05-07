@@ -7,7 +7,7 @@ import { AdminDTO } from "./dtos/admin.dto";
   providedIn: "root",
 })
 export class AdminService {
-  private apiUrl = "api/adminData";
+  private apiUrl = "api/admin";
 
   constructor(private http: HttpClient) {}
 

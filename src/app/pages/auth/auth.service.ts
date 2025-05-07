@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   onLogin(email: string, password: string) {
-    return this.http.get<any[]>("api/adminData").pipe(
+    return this.http.get<any[]>("api/admin").pipe(
       delay(500),
       map((users) => {
         const user = users.find(

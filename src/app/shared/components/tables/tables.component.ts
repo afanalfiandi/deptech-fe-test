@@ -15,8 +15,8 @@ export class TablesComponent {
     this.edit.emit(data);
   }
 
-  onDeleteData() {
-    this.delete.emit();
+  onDeleteData(data: any) {
+    this.delete.emit(data);
   }
 
   get rowValues(): any[] {
