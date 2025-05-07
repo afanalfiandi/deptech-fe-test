@@ -9,21 +9,28 @@
       Enter your username and password to sign in.
     </p>
 
-    <form class="max-w-sm mx-auto">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-sm mx-auto">
       <div class="mb-5">
-        <label
-          for="username"
-          class="block mb-2 text-sm font-medium text-gray-900"
-        >
-          Username
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">
+          Email
         </label>
         <input
           type="text"
-          id="username"
+          id="email"
+          formControlName="email"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-          placeholder="Your username"
+          placeholder="Your email"
           required
         />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (form.get('email')?.errors?.['required']) {
+          <div>Email is required</div>
+          } @else {
+          <div>Invalid email</div>
+          }
+        </div>
+        }
       </div>
       <div class="mb-5">
         <label
@@ -35,10 +42,21 @@
         <input
           type="password"
           id="password"
+          formControlName="password"
           placeholder="Your password"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
           required
         />
+
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (form.get('password')?.errors?.['required']) {
+          <div>Password is required</div>
+          } @else {
+          <div>Minimum 6 characters</div>
+          }
+        </div>
+        }
       </div>
 
       <button
