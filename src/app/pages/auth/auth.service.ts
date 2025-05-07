@@ -1,12 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { delay, map, throwError } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   onLogin(email: string, password: string) {
     return this.http.get<any[]>("api/adminData").pipe(
@@ -27,6 +28,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem("token");
+    this.router.navigate(["/"]);
   }
 
   isLoggedIn(): boolean {
