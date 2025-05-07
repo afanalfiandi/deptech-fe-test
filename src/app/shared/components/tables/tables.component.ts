@@ -11,8 +11,8 @@ export class TablesComponent {
   @Output() edit = new EventEmitter();
   @Output() delete = new EventEmitter();
 
-  onEditData() {
-    this.edit.emit();
+  onEditData(data: any) {
+    this.edit.emit(data);
   }
 
   onDeleteData() {

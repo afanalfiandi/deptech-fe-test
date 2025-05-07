@@ -6,6 +6,7 @@ import { AdminService } from "./admin.service";
 import { tap } from "rxjs";
 import { TableDataDTO } from "../../shared/dtos/table-data.dto";
 import { AdminColumnData } from "./consts/column-data.const";
+import { AdminDTO } from "./dtos/admin.dto";
 
 @Component({
   selector: "app-admin",
@@ -26,13 +27,18 @@ export class AdminComponent implements OnInit {
 
   onAddData() {
     this.router.navigate(["/form"], {
-      state: { formData: AdminFormData, mode: "add" },
+      state: { formData: AdminFormData, mode: "add", title: "Admin" },
     });
   }
 
-  onEditData() {
+  onEditData(value: AdminDTO) {
     this.router.navigate(["/form"], {
-      state: { formData: AdminFormData, mode: "edit", data: this.data.data[0] },
+      state: {
+        formData: AdminFormData,
+        mode: "edit",
+        data: value,
+        title: "Admin",
+      },
     });
   }
 

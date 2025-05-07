@@ -16,7 +16,7 @@
     <div class="relative overflow-x-auto mt-2">
       <app-tables
         [data]="data"
-        (edit)="onEditData()"
+        (edit)="onEditData($event)"
         (delete)="onDeleteData()"
       ></app-tables>
     </div>
