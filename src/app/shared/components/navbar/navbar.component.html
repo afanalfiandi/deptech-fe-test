@@ -63,17 +63,19 @@
               aria-labelledby="dropdownLargeButton"
             >
               <li>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100"
-                  >Settings</a
-                >
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100">
+                  Settings
+                </a>
               </li>
             </ul>
             <div class="py-1">
-              <a
+              <div
+                (click)="onLogout()"
                 href="#"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >Sign out</a
               >
+                Sign out
+              </div>
             </div>
           </div>
         </li>
