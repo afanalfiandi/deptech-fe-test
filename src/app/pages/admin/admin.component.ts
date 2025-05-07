@@ -2,6 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { TablesComponent } from "../../shared/components/tables/tables.component";
 import { Router } from "@angular/router";
 import { AdminFormData } from "./consts/form-data.const";
+import { AdminService } from "./admin.service";
+import { tap } from "rxjs";
+import { TableDataDTO } from "../../shared/dtos/table-data.dto";
+import { AdminColumnData } from "./consts/column-data.const";
 
 @Component({
   selector: "app-admin",
@@ -9,26 +13,16 @@ import { AdminFormData } from "./consts/form-data.const";
   templateUrl: "./admin.component.html",
   styleUrl: "./admin.component.css",
 })
-export class AdminComponent {
-  constructor(private router: Router) {}
-  data: any = {
-    column: [
-      { colName: "Nama Depan", key: "firstName" },
-      { colName: "Nama Belakang", key: "lastName" },
-      { colName: "Email", key: "email" },
-      { colName: "Tanggal Lahir", key: "dateOfBirth" },
-      { colName: "Jenis Kelamin", key: "gender" },
-    ],
-    data: [
-      {
-        firstName: "Syahrul",
-        lastName: "Gunawan",
-        email: "syahrul@gmail.com",
-        dateOfBirth: "2025-05-07",
-        gender: 1,
-      },
-    ],
+export class AdminComponent implements OnInit {
+  constructor(private router: Router, private service: AdminService) {}
+  data: TableDataDTO = {
+    column: [],
+    data: [],
   };
+
+  ngOnInit(): void {
+    this.onGetData();
+  }
 
   onAddData() {
     this.router.navigate(["/form"], {
@@ -46,5 +40,19 @@ export class AdminComponent {
     this.router.navigate(["/delete"], {
       state: { data: this.data.data[0] },
     });
+  }
+
+  onGetData() {
+    this.service
+      .getData()
+      .pipe(
+        tap((res) => {
+          if (res) {
+            this.data.column = AdminColumnData;
+            this.data.data = res;
+          }
+        })
+      )
+      .subscribe();
   }
 }
