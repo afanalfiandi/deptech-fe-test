@@ -13,6 +13,7 @@ import { MESSAGE } from "../../enums/message.enum";
 import { MODE } from "../../enums/mode.enum";
 import { EmployeeService } from "../../../pages/employee/employee.service";
 import { Observable } from "rxjs";
+import { OnLeaveService } from "../../../pages/on-leave/on-leave.service";
 
 @Component({
   selector: "app-form",
@@ -32,7 +33,8 @@ export class FormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private leaveService: OnLeaveService
   ) {}
 
   ngOnInit(): void {
@@ -82,30 +84,41 @@ export class FormComponent implements OnInit {
       } = {
         [COLLECTION.admin]: this.adminService,
         [COLLECTION.employee]: this.employeeService,
+        [COLLECTION.leave]: this.leaveService,
       };
       const service = serviceMap[this.collectionName];
 
       if (this.mode === MODE.add) {
         if (service) {
-          service.addData(this.form.value).subscribe((res) => {
-            if (res) {
-              ToastNotif("success", MESSAGE.addSuccess);
-              window.history.back();
-            }
+          service.addData(this.form.value).subscribe({
+            next: (res) => {
+              if (res) {
+                ToastNotif("success", MESSAGE.addSuccess);
+                this.form.reset();
+                window.history.back();
+              }
+            },
+            error: (err) => {
+              ToastNotif("error", err);
+            },
           });
         }
       } else {
         if (service) {
-          service.updateData(this.form.value).subscribe((res) => {
-            if (res) {
-              ToastNotif("success", MESSAGE.addSuccess);
-              window.history.back();
-            }
+          service.updateData(this.form.value).subscribe({
+            next: (res) => {
+              if (res) {
+                ToastNotif("success", MESSAGE.addSuccess);
+                this.form.reset();
+                window.history.back();
+              }
+            },
+            error: (err) => {
+              ToastNotif("error", err);
+            },
           });
         }
       }
-
-      this.form.reset();
     } else {
       this.form.markAllAsTouched();
     }

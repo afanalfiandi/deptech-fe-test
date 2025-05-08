@@ -8,6 +8,7 @@ import { AuthLayoutComponent } from "./shared/layout/auth-layout/auth-layout.com
 import { MainComponent } from "./shared/layout/main/main.component";
 import { AuthGuard } from "./core/guards/auth.guard";
 import { EmployeeComponent } from "./pages/employee/employee.component";
+import { OnLeaveComponent } from "./pages/on-leave/on-leave.component";
 
 export const routes: Routes = [
   {
@@ -32,6 +33,11 @@ export const routes: Routes = [
       {
         path: "pegawai",
         component: EmployeeComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "cuti",
+        component: OnLeaveComponent,
         canActivate: [AuthGuard],
       },
       {
