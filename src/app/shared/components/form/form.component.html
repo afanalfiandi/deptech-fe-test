@@ -48,6 +48,9 @@
           "
           class="text-red-500 text-sm"
         >
+          <div *ngIf="form.controls[item.key].errors?.['email']">
+            Format {{ item.label }} tidak valid.
+          </div>
           <div *ngIf="form.controls[item.key].errors?.['required']">
             {{ item.label }} wajib diisi.
           </div>

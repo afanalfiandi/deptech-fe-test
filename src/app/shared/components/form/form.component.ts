@@ -59,6 +59,8 @@ export class FormComponent implements OnInit {
         validators.push(Validators.required);
       }
 
+      if (item.type === "email") validators.push(Validators.email);
+
       if (item.validators) {
         validators = validators.concat(this.parseValidators(item.validators));
       }
