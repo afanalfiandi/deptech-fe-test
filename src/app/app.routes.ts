@@ -7,6 +7,7 @@ import { DeleteFormComponent } from "./shared/components/delete-form/delete-form
 import { AuthLayoutComponent } from "./shared/layout/auth-layout/auth-layout.component";
 import { MainComponent } from "./shared/layout/main/main.component";
 import { AuthGuard } from "./core/guards/auth.guard";
+import { EmployeeComponent } from "./pages/employee/employee.component";
 
 export const routes: Routes = [
   {
@@ -26,6 +27,11 @@ export const routes: Routes = [
       {
         path: "admin",
         component: AdminComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "pegawai",
+        component: EmployeeComponent,
         canActivate: [AuthGuard],
       },
       {
