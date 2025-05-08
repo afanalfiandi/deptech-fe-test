@@ -7,7 +7,7 @@ import { OnLeaveDTO } from "./dtos/on-leave.dto";
   providedIn: "root",
 })
 export class OnLeaveService {
-  private apiUrl = "api/leave"; // Gantilah dengan URL API Anda
+  private apiUrl = "api/leave";
 
   constructor(private http: HttpClient) {}
 
@@ -60,6 +60,6 @@ export class OnLeaveService {
   private calculateLeaveDays(leave: OnLeaveDTO): number {
     const start = new Date(leave.startDate);
     const end = new Date(leave.endDate);
-    return (end.getTime() - start.getTime()) / (1000 * 3600 * 24) + 1; // Menghitung selisih hari
+    return (end.getTime() - start.getTime()) / (1000 * 3600 * 24) + 1;
   }
 }
