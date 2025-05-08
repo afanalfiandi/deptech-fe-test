@@ -25,7 +25,7 @@ export const EmployeeFormData = [
   },
   {
     label: "Alamat",
-    type: "textarea",
+    type: "text",
     key: "address",
     required: true,
   },
