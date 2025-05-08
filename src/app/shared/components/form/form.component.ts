@@ -7,6 +7,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { AdminService } from "../../../pages/admin/admin.service";
+import { COLLECTION } from "../../enums/collection.enum";
 
 @Component({
   selector: "app-form",
@@ -65,7 +66,7 @@ export class FormComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       if (this.mode === "add") {
-        if (this.collectionName === "admin") {
+        if (this.collectionName === COLLECTION.admin) {
           this.adminService.addData(this.form.value).subscribe(() => {
             window.history.back();
           });
@@ -73,7 +74,7 @@ export class FormComponent implements OnInit {
           // TODO : DO SOMETHING ELSE HERE
         }
       } else {
-        if (this.collectionName === "admin") {
+        if (this.collectionName === COLLECTION.admin) {
           this.adminService.updateData(this.form.value).subscribe(() => {
             window.history.back();
           });

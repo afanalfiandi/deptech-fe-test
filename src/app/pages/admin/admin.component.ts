@@ -7,6 +7,7 @@ import { tap } from "rxjs";
 import { TableDataDTO } from "../../shared/dtos/table-data.dto";
 import { AdminColumnData } from "./consts/column-data.const";
 import { AdminDTO } from "./dtos/admin.dto";
+import { COLLECTION } from "../../shared/enums/collection.enum";
 
 @Component({
   selector: "app-admin",
@@ -30,7 +31,7 @@ export class AdminComponent implements OnInit {
       state: {
         formData: AdminFormData,
         mode: "add",
-        collectionName: "admin",
+        collectionName: COLLECTION.admin,
       },
     });
   }
@@ -41,7 +42,7 @@ export class AdminComponent implements OnInit {
         formData: AdminFormData,
         mode: "edit",
         data: value,
-        collectionName: "admin",
+        collectionName: COLLECTION.admin,
       },
     });
   }
@@ -50,7 +51,7 @@ export class AdminComponent implements OnInit {
     this.router.navigate(["/delete"], {
       state: {
         id: id,
-        collection: "admin",
+        collectionName: COLLECTION.admin,
       },
     });
   }
