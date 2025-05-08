@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { AdminDTO } from "./dtos/admin.dto";
 
 @Injectable({
@@ -26,5 +26,11 @@ export class AdminService {
   deleteData(id: number): Observable<any> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete(url);
+  }
+
+  getDataByToken(token: string): Observable<AdminDTO | undefined> {
+    return this.getData().pipe(
+      map((admins) => admins.find((admin) => admin.token === token))
+    );
   }
 }

@@ -4,7 +4,8 @@
   >
     <div class="flex justify-between items-center mb-4">
       <p class="text-xl font-bold">
-        Tambah Data {{ collectionName | titlecase }}
+        {{ mode === "add" ? "Tambah " : "Ubah " }} Data
+        {{ collectionName | titlecase }}
       </p>
     </div>
 

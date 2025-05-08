@@ -5,6 +5,7 @@ import { ToastNotif } from "../../../core/decorators/toast.decorator";
 import { MESSAGE } from "../../enums/message.enum";
 import { Observable } from "rxjs";
 import { EmployeeService } from "../../../pages/employee/employee.service";
+import { OnLeaveService } from "../../../pages/on-leave/on-leave.service";
 
 @Component({
   selector: "app-delete-form",
@@ -18,7 +19,8 @@ export class DeleteFormComponent implements OnInit {
 
   constructor(
     private adminService: AdminService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private leaveService: OnLeaveService
   ) {}
   ngOnInit(): void {
     const state = history.state;
@@ -36,6 +38,7 @@ export class DeleteFormComponent implements OnInit {
     } = {
       [COLLECTION.admin]: this.adminService,
       [COLLECTION.employee]: this.employeeService,
+      [COLLECTION.leave]: this.leaveService,
     };
 
     const service = serviceMap[this.collectionName];

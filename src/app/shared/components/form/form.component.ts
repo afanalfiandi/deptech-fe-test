@@ -107,11 +107,9 @@ export class FormComponent implements OnInit {
         if (service) {
           service.updateData(this.form.value).subscribe({
             next: (res) => {
-              if (res) {
-                ToastNotif("success", MESSAGE.addSuccess);
-                this.form.reset();
-                window.history.back();
-              }
+              ToastNotif("success", MESSAGE.editSuccess);
+              this.form.reset();
+              window.history.back();
             },
             error: (err) => {
               ToastNotif("error", err);
