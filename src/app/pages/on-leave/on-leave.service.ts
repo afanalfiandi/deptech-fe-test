@@ -2,17 +2,16 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of, switchMap, tap } from "rxjs";
 import { OnLeaveDTO } from "./dtos/on-leave.dto";
+import { API } from "../../shared/consts/api.const";
 
 @Injectable({
   providedIn: "root",
 })
 export class OnLeaveService {
-  private apiUrl = "api/leave";
-
   constructor(private http: HttpClient) {}
 
   getData(): Observable<OnLeaveDTO[]> {
-    return this.http.get<OnLeaveDTO[]>(this.apiUrl);
+    return this.http.get<OnLeaveDTO[]>(API.leaveApiUrl);
   }
 
   addData(item: OnLeaveDTO): Observable<OnLeaveDTO> {
@@ -44,16 +43,16 @@ export class OnLeaveService {
           );
         }
       }),
-      switchMap(() => this.http.post<OnLeaveDTO>(this.apiUrl, item))
+      switchMap(() => this.http.post<OnLeaveDTO>(API.leaveApiUrl, item))
     );
   }
 
   updateData(item: OnLeaveDTO): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${item.id}`, item);
+    return this.http.put(`${API.leaveApiUrl}/${item.id}`, item);
   }
 
   deleteData(id: number): Observable<any> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${API.leaveApiUrl}/${id}`;
     return this.http.delete(url);
   }
 
