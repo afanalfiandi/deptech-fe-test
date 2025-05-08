@@ -8,6 +8,7 @@ import { TableDataDTO } from "../../shared/dtos/table-data.dto";
 import { AdminColumnData } from "./consts/column-data.const";
 import { AdminDTO } from "./dtos/admin.dto";
 import { COLLECTION } from "../../shared/enums/collection.enum";
+import { MODE } from "../../shared/enums/mode.enum";
 
 @Component({
   selector: "app-admin",
@@ -30,7 +31,7 @@ export class AdminComponent implements OnInit {
     this.router.navigate(["/form"], {
       state: {
         formData: AdminFormData,
-        mode: "add",
+        mode: MODE.add,
         collectionName: COLLECTION.admin,
       },
     });
@@ -40,7 +41,7 @@ export class AdminComponent implements OnInit {
     this.router.navigate(["/form"], {
       state: {
         formData: AdminFormData,
-        mode: "edit",
+        mode: MODE.edit,
         data: value,
         collectionName: COLLECTION.admin,
       },

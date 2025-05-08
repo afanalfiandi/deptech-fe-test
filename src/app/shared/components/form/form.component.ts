@@ -8,6 +8,9 @@ import {
 } from "@angular/forms";
 import { AdminService } from "../../../pages/admin/admin.service";
 import { COLLECTION } from "../../enums/collection.enum";
+import { ToastNotif } from "../../../core/decorators/toast.decorator";
+import { MESSAGE } from "../../enums/message.enum";
+import { MODE } from "../../enums/mode.enum";
 
 @Component({
   selector: "app-form",
@@ -19,7 +22,7 @@ import { COLLECTION } from "../../enums/collection.enum";
 export class FormComponent implements OnInit {
   form!: FormGroup;
   formData!: any[];
-  mode: "edit" | "add" = "add";
+  mode: MODE.edit | MODE.add = MODE.add;
   data: any;
   collectionName!: string;
   mockData: any[] = [];
@@ -65,10 +68,13 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      if (this.mode === "add") {
+      if (this.mode === MODE.add) {
         if (this.collectionName === COLLECTION.admin) {
-          this.adminService.addData(this.form.value).subscribe(() => {
-            window.history.back();
+          this.adminService.addData(this.form.value).subscribe((res) => {
+            if (res) {
+              ToastNotif("success", MESSAGE.addSuccess);
+              window.history.back();
+            }
           });
         } else {
           // TODO : DO SOMETHING ELSE HERE
@@ -76,6 +82,7 @@ export class FormComponent implements OnInit {
       } else {
         if (this.collectionName === COLLECTION.admin) {
           this.adminService.updateData(this.form.value).subscribe(() => {
+            ToastNotif("success", MESSAGE.editSuccess);
             window.history.back();
           });
         } else {
