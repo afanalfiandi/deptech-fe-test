@@ -11,6 +11,8 @@ import { COLLECTION } from "../../enums/collection.enum";
 import { ToastNotif } from "../../../core/decorators/toast.decorator";
 import { MESSAGE } from "../../enums/message.enum";
 import { MODE } from "../../enums/mode.enum";
+import { EmployeeService } from "../../../pages/employee/employee.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-form",
@@ -27,7 +29,11 @@ export class FormComponent implements OnInit {
   collectionName!: string;
   mockData: any[] = [];
 
-  constructor(private fb: FormBuilder, private adminService: AdminService) {}
+  constructor(
+    private fb: FormBuilder,
+    private adminService: AdminService,
+    private employeeService: EmployeeService
+  ) {}
 
   ngOnInit(): void {
     const state = history.state;
@@ -68,25 +74,34 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
+      const serviceMap: {
+        [key: string]: {
+          addData: (data: any) => Observable<any>;
+          updateData: (data: any) => Observable<any>;
+        };
+      } = {
+        [COLLECTION.admin]: this.adminService,
+        [COLLECTION.employee]: this.employeeService,
+      };
+      const service = serviceMap[this.collectionName];
+
       if (this.mode === MODE.add) {
-        if (this.collectionName === COLLECTION.admin) {
-          this.adminService.addData(this.form.value).subscribe((res) => {
+        if (service) {
+          service.addData(this.form.value).subscribe((res) => {
             if (res) {
               ToastNotif("success", MESSAGE.addSuccess);
               window.history.back();
             }
           });
-        } else {
-          // TODO : DO SOMETHING ELSE HERE
         }
       } else {
-        if (this.collectionName === COLLECTION.admin) {
-          this.adminService.updateData(this.form.value).subscribe(() => {
-            ToastNotif("success", MESSAGE.editSuccess);
-            window.history.back();
+        if (service) {
+          service.updateData(this.form.value).subscribe((res) => {
+            if (res) {
+              ToastNotif("success", MESSAGE.addSuccess);
+              window.history.back();
+            }
           });
-        } else {
-          // TODO : DO SOMETHING ELSE HERE
         }
       }
 

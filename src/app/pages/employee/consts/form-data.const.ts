@@ -1,4 +1,4 @@
-export const AdminFormData = [
+export const EmployeeFormData = [
   {
     label: "Nama Depan",
     type: "text",
@@ -18,9 +18,15 @@ export const AdminFormData = [
     required: true,
   },
   {
-    label: "Tanggal Lahir",
-    type: "date",
-    key: "dateOfBirth",
+    label: "No. Telepon",
+    type: "text",
+    key: "phoneNumber",
+    required: true,
+  },
+  {
+    label: "Alamat",
+    type: "textarea",
+    key: "address",
     required: true,
   },
   {
@@ -38,12 +44,5 @@ export const AdminFormData = [
         label: "Perempuan",
       },
     ],
-  },
-  {
-    label: "Password",
-    type: "password",
-    key: "password",
-    required: true,
-    validators: ["minLength:6"],
   },
 ];

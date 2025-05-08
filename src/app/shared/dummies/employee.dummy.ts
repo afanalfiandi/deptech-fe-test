@@ -1,8 +1,8 @@
-import { EmployeeDTO } from "../../pages/admin/dtos/employee.dto";
+import { EmployeeDTO } from "../../pages/employee/dtos/employee.dto";
 
-export const employeeData: EmployeeDTO[] = [
+export const employee: EmployeeDTO[] = [
   {
-    employeeID: 1,
+    id: 1,
     firstName: "Tiffany",
     lastName: "Angela",
     email: "employee123@gmail.com",
@@ -11,7 +11,7 @@ export const employeeData: EmployeeDTO[] = [
     gender: 2,
   },
   {
-    employeeID: 2,
+    id: 2,
     firstName: "Angga",
     lastName: "Candra",
     email: "employee124@gmail.com",
@@ -21,7 +21,7 @@ export const employeeData: EmployeeDTO[] = [
     gender: 1,
   },
   {
-    employeeID: 1,
+    id: 1,
     firstName: "Moskov",
     lastName: "Setiadi",
     email: "employee125@gmail.com",

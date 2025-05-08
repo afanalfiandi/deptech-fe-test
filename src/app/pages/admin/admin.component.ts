@@ -17,11 +17,12 @@ import { MODE } from "../../shared/enums/mode.enum";
   styleUrl: "./admin.component.css",
 })
 export class AdminComponent implements OnInit {
-  constructor(private router: Router, private service: AdminService) {}
   data: TableDataDTO = {
     column: [],
     data: [],
   };
+  
+  constructor(private router: Router, private service: AdminService) {}
 
   ngOnInit(): void {
     this.onGetData();

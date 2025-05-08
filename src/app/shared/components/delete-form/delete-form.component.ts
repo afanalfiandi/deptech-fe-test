@@ -3,6 +3,8 @@ import { AdminService } from "../../../pages/admin/admin.service";
 import { COLLECTION } from "../../enums/collection.enum";
 import { ToastNotif } from "../../../core/decorators/toast.decorator";
 import { MESSAGE } from "../../enums/message.enum";
+import { Observable } from "rxjs";
+import { EmployeeService } from "../../../pages/employee/employee.service";
 
 @Component({
   selector: "app-delete-form",
@@ -14,7 +16,10 @@ export class DeleteFormComponent implements OnInit {
   collectionName!: string;
   id!: number;
 
-  constructor(private adminService: AdminService) {}
+  constructor(
+    private adminService: AdminService,
+    private employeeService: EmployeeService
+  ) {}
   ngOnInit(): void {
     const state = history.state;
     if (state) {
@@ -24,8 +29,19 @@ export class DeleteFormComponent implements OnInit {
   }
 
   onDelete() {
-    if (this.collectionName === COLLECTION.admin) {
-      this.adminService.deleteData(this.id).subscribe(() => {
+    const serviceMap: {
+      [key: string]: {
+        deleteData: (data: any) => Observable<any>;
+      };
+    } = {
+      [COLLECTION.admin]: this.adminService,
+      [COLLECTION.employee]: this.employeeService,
+    };
+
+    const service = serviceMap[this.collectionName];
+
+    if (service) {
+      service.deleteData(this.id).subscribe((res) => {
         ToastNotif("success", MESSAGE.deleteSuccess);
         window.history.back();
       });

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { employeeData } from "../dummies/employee.dummy";
+import { employee } from "../dummies/employee.dummy";
 import { admin } from "../dummies/admin.dummy";
 import { COLLECTION } from "../enums/collection.enum";
 
@@ -11,7 +11,7 @@ export class DbService {
 
   constructor() {
     this.db[COLLECTION.admin] = [...admin];
-    this.db[COLLECTION.employee] = [...employeeData];
+    this.db[COLLECTION.employee] = [...employee];
   }
 
   getAll(collectionName: string): any[] {
@@ -19,6 +19,9 @@ export class DbService {
   }
 
   createDb() {
-    return { admin: admin };
+    return {
+      admin: [...admin],
+      employee: [...employee],
+    };
   }
 }
